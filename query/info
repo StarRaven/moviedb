@@ -15,3 +15,22 @@ curl -X PUT 'localhost:9200/accounts/person/2' -H 'Content-Type: application/jso
 curl -X GET 'localhost:9200/accounts/person/_search?pretty' -H 'Content-Type: application/json' -d @search.txt
 
 curl -X GET 'localhost:9200/database/movies/_search?pretty' -H 'Content-Type: application/json' -d @search.txt
+
+curl –u elastic:uEFp16B1cfVjCSjSJu3j -X POST "http://127.0.0.1:9200/database/movies/_delete_by_query?conflicts=proceed" -H "Content-Type: application/json" -d @delete.txt
+
+output {
+elasticsearch {
+action => "index"
+hosts => ["localhost:9200"] 
+#index => "logstash-%{+YYYY.MM.dd}"
+index => "json"
+workers => 1
+user => "elastic"
+password => "uEFp16B1cfVjCSjSJu3j"
+}
+stdout {
+codec => rubydebug
+}
+}
+
+curl –u elastic:uEFp16B1cfVjCSjSJu3j -X GET "localhost:9200/database/movies/_search?pretty" -H "Content-Type: application/json" -d @search.txt

@@ -1,0 +1,14 @@
+Changed password for user kibana
+PASSWORD kibana = lMVPDeWoemfIRDv3lYOC
+
+Changed password for user logstash_system
+PASSWORD logstash_system = kNcwp0npdc3G5I5L53OF
+
+Changed password for user elastic
+PASSWORD elastic = uEFp16B1cfVjCSjSJu3j
+
+elasticsearch.username: "kibana"
+
+elasticsearch.password: "lMVPDeWoemfIRDv3lYOC"
+
+logstash -e 'input { stdin { } } output { elasticsearch { hosts => ["127.0.0.1:9200"] user => "elastic" password => "uEFp16B1cfVjCSjSJu3j"} }'
