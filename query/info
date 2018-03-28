@@ -1,0 +1,17 @@
+api
+abc69f3218f083159cb0ebe413e122d2
+
+id
+514246
+
+
+sudo /usr/share/elasticsearch/bin/elasticsearch
+
+
+curl -X PUT 'localhost:9200/accounts/person/1' -H 'Content-Type: application/json' -d @json1.txt
+
+curl -X PUT 'localhost:9200/accounts/person/2' -H 'Content-Type: application/json' -d @json2.txt
+
+curl -X GET 'localhost:9200/accounts/person/_search?pretty' -H 'Content-Type: application/json' -d @search.txt
+
+curl -X GET 'localhost:9200/database/movies/_search?pretty' -H 'Content-Type: application/json' -d @search.txt
