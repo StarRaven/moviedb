@@ -1,0 +1,28 @@
+{
+	"query": {
+		"query_string": {
+			"query": "crime"
+		}
+	},
+	"controls": {
+		"use_significance": true,
+		"sample_size": 2000,
+		"timeout": 5000
+	},
+	"connections": {
+		"vertices": [
+			{
+				"field": "genres.name.keyword",
+				"size": 5,
+				"min_doc_count": 3
+			}
+		]
+	},
+	"vertices": [
+		{
+			"field": "genres.name.keyword",
+			"size": 5,
+			"min_doc_count": 3
+		}
+	]
+}

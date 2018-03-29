@@ -33,4 +33,12 @@ codec => rubydebug
 }
 }
 
+http://host:port//_xpack/graph/_explore
+
+
 curl –u elastic:uEFp16B1cfVjCSjSJu3j -X GET "localhost:9200/database/movies/_search?pretty" -H "Content-Type: application/json" -d @search.txt
+
+
+curl –u elastic:uEFp16B1cfVjCSjSJu3j -X GET "http://localhost:9200/moviedb/_xpack/graph/_explore" -H "Content-Type: application/json" -d @graph.txt
+
+logstash -f logstash-simple.conf --quiet

@@ -32,6 +32,8 @@
   <ng-select [items]="simpleItems"
            [(ngModel)]="selectedSimpleItem">
   </ng-select>
+
+  <div echarts [options]="chartOption" (chartClick)="onChartEvent($event, 'chartClick')" class="demo-chart"></div>
 </body>
 
 </html>

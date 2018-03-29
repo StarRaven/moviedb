@@ -1,0 +1,195 @@
+{
+  "took": 0,
+  "timed_out": false,
+  "failures": [],
+  "vertices": [
+    {
+      "field": "genres.name.keyword",
+      "term": "Fantasy",
+      "weight": 0.0007353885130836975,
+      "depth": 1
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Romance",
+      "weight": 0.00018538064984116324,
+      "depth": 1
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Action",
+      "weight": 0.01577779096648183,
+      "depth": 0
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Drama",
+      "weight": 0.023782260173835296,
+      "depth": 0
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Horror",
+      "weight": 0.005534387230697638,
+      "depth": 1
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Crime",
+      "weight": 0.8117747099531069,
+      "depth": 0
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Adventure",
+      "weight": 0.0022493997074644867,
+      "depth": 1
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Thriller",
+      "weight": 0.26298364836982546,
+      "depth": 0
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Mystery",
+      "weight": 0.038328673769035024,
+      "depth": 0
+    },
+    {
+      "field": "genres.name.keyword",
+      "term": "Science Fiction",
+      "weight": 0.0051360560194483006,
+      "depth": 1
+    }
+  ],
+  "connections": [
+    {
+      "source": 5,
+      "target": 2,
+      "weight": 0.0005719636566043709,
+      "doc_count": 15
+    },
+    {
+      "source": 7,
+      "target": 9,
+      "weight": 0.004044109452338514,
+      "doc_count": 20
+    },
+    {
+      "source": 7,
+      "target": 2,
+      "weight": 0.006327794299675402,
+      "doc_count": 33
+    },
+    {
+      "source": 8,
+      "target": 4,
+      "weight": 0.0018445550288571514,
+      "doc_count": 5
+    },
+    {
+      "source": 7,
+      "target": 8,
+      "weight": 0.010727239642656783,
+      "doc_count": 29
+    },
+    {
+      "source": 7,
+      "target": 4,
+      "weight": 0.0036898322018404863,
+      "doc_count": 13
+    },
+    {
+      "source": 2,
+      "target": 0,
+      "weight": 0.0007353885130836975,
+      "doc_count": 16
+    },
+    {
+      "source": 2,
+      "target": 7,
+      "weight": 0.0009817712096450177,
+      "doc_count": 33
+    },
+    {
+      "source": 3,
+      "target": 5,
+      "weight": 0.00005854219294869021,
+      "doc_count": 51
+    },
+    {
+      "source": 3,
+      "target": 1,
+      "weight": 0.00018538064984116324,
+      "doc_count": 68
+    },
+    {
+      "source": 2,
+      "target": 9,
+      "weight": 0.0010919465671097865,
+      "doc_count": 18
+    },
+    {
+      "source": 7,
+      "target": 5,
+      "weight": 0.015055466776986262,
+      "doc_count": 52
+    },
+    {
+      "source": 2,
+      "target": 6,
+      "weight": 0.0022493997074644867,
+      "doc_count": 30
+    },
+    {
+      "source": 8,
+      "target": 7,
+      "weight": 0.0065242288838717796,
+      "doc_count": 29
+    },
+    {
+      "source": 5,
+      "target": 3,
+      "weight": 0.009019928471640952,
+      "doc_count": 61
+    },
+    {
+      "source": 8,
+      "target": 5,
+      "weight": 0.0011938251431753634,
+      "doc_count": 12
+    },
+    {
+      "source": 5,
+      "target": 8,
+      "weight": 0.007996931863416221,
+      "doc_count": 12
+    },
+    {
+      "source": 8,
+      "target": 3,
+      "weight": 0.0005145650612001722,
+      "doc_count": 30
+    },
+    {
+      "source": 5,
+      "target": 7,
+      "weight": 0.09362926954023729,
+      "doc_count": 52
+    },
+    {
+      "source": 3,
+      "target": 8,
+      "weight": 0.00003128698341840851,
+      "doc_count": 30
+    },
+    {
+      "source": 2,
+      "target": 5,
+      "weight": 0.000014269506807827947,
+      "doc_count": 15
+    }
+  ]
+}

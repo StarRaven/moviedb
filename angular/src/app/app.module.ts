@@ -35,6 +35,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FlexLayoutModule,
 
     NgSelectModule,
+    NgxEchartsModule,
 
     RouterModule.forRoot([
       { path: '', redirectTo: '/users', pathMatch: 'full' },
