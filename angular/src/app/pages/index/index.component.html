@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="spm-id" content="a21e4">
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+</head>
+
+<body >
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Custom Toolbar</span>
+        </mat-toolbar-row>
+      
+        <mat-toolbar-row>
+          <span>Second Line</span>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon">verified_user</mat-icon>
+        </mat-toolbar-row>
+      
+        <mat-toolbar-row>
+          <span>Third Line</span>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon">favorite</mat-icon>
+          <mat-icon class="example-icon">delete</mat-icon>
+        </mat-toolbar-row>
+      </mat-toolbar>
+  <ng-select [items]="simpleItems"
+           [(ngModel)]="selectedSimpleItem">
+  </ng-select>
+</body>
+
+</html>
