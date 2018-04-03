@@ -10,27 +10,9 @@
   <meta name="renderer" content="webkit">
 </head>
 
-<body >
-    <mat-toolbar color="primary">
-        <mat-toolbar-row>
-          <span>Custom Toolbar</span>
-        </mat-toolbar-row>
-      
-        <mat-toolbar-row>
-          <span>Second Line</span>
-          <span class="example-spacer"></span>
-          <mat-icon class="example-icon">verified_user</mat-icon>
-        </mat-toolbar-row>
-      
-        <mat-toolbar-row>
-          <span>Third Line</span>
-          <span class="example-spacer"></span>
-          <mat-icon class="example-icon">favorite</mat-icon>
-          <mat-icon class="example-icon">delete</mat-icon>
-        </mat-toolbar-row>
-      </mat-toolbar>
-  <ng-select [items]="simpleItems"
-           [(ngModel)]="selectedSimpleItem">
+<body>
+  <app-topmenu></app-topmenu>
+  <ng-select [items]="movies" [typeahead]="searchTerm" [(ngModel)]="selectedMovie">
   </ng-select>
 
   <div echarts [options]="chartOption" (chartClick)="onChartEvent($event, 'chartClick')" class="demo-chart"></div>

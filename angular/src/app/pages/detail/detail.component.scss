@@ -1,0 +1,51 @@
+.inner-info {
+  margin: auto;
+}
+
+.info-text {
+  color: white;
+  padding: 0 45px;
+}
+
+.info-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20% 50%, rgba(13.73%, 18.04%, 14.90%, 0.98) 0%, rgba(13.73%, 18.04%, 14.90%, 0.88) 100%);
+}
+
+.wrapper {
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+.poster {
+  border-radius: 5px;
+  padding: 0;
+  width: 300px;
+  height: 450px;
+  cursor: pointer;
+}
+
+.poster-img {
+  border-radius: 5px;
+  width: 300px;
+  height: 450px;
+}
+
+.release-date {
+  opacity: 0.6;
+  font-size: 1.7em;
+  font-weight: 400;
+}
+
+.rate {
+  width: 60px;
+  height: 60px;
+  margin-top: 16px;
+}

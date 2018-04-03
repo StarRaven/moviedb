@@ -1,0 +1,47 @@
+<app-topmenu></app-topmenu>
+<div class="wrapper" [ngStyle]="{'background-image': 'url(' + poster.src + ')'}">
+  <div class="info-wrapper">
+    <div class="inner-info" fxLayout="row">
+      <div fxFlex="25"></div>
+      <div fxFlex="50">
+        <mat-card class="poster" fxFlex="none">
+          <img class="poster-img" [src]="poster.thumb" (click)="open()" />
+        </mat-card>
+        <div class="info-text" fxFlex="auto"> 
+          <span>
+            <h2 style="display:inline-block; margin:0">{{movieData.title}}</h2>
+            <span class="release-date">({{movieData.release_date}})</span>
+          </span>
+          <div echarts [options]="chartOption" class="rate"></div>
+          <h3 style="margin-bottom: 0">Overview</h3>
+          <div>
+            <p>{{movieData.overview}}</p>
+          </div>
+          <h3 style="margin-bottom: 0">Genres</h3>
+          <div fxLayout="row">
+            <div fxFlex="33" *ngFor="let genre of movieData.genres">
+              <p>{{genre.name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="25"></div>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxFlex="25"></div>
+    <div fxFlex="50">
+
+      <h3>Recommendations</h3>
+      <hr />
+      <div >
+        <div style="width:33%; display:inline-block;">12</div>
+        <div style="width:33%; display:inline-block;">12</div>
+        <div style="width:33%; display:inline-block;">12</div>
+        <div style="width:33%; display:inline-block;">12</div>
+      </div>
+    </div>
+    <div fxFlex="25"></div>
+  </div>
+</div>

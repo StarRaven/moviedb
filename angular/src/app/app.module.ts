@@ -30,20 +30,23 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TopmenuComponent } from './pages/topmenu/topmenu.component';
 
 import { IndexComponent } from './pages/index/index.component';
-import { AdminComponent } from './pages/admin/admin.component';
 
 
 import { FlexLayoutModule } from "@angular/flex-layout";
-
+import { LightboxModule } from 'angular2-lightbox';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { SearchComponent } from './pages/search/search.component';
+import { DetailComponent } from './pages/detail/detail.component';
 
+import { MovieService } from './services/movie.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopmenuComponent,
     IndexComponent,
-    AdminComponent,
+    SearchComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,17 +75,22 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
     FlexLayoutModule,
 
+    LightboxModule,
+
     NgSelectModule,
     NgxEchartsModule,
 
     RouterModule.forRoot([
-      { path: '', redirectTo: '/users', pathMatch: 'full' },
-      { path: 'users', component: IndexComponent },
+      { path: '', redirectTo: '/index', pathMatch: 'full' },
+      { path: 'index', component: IndexComponent },
+      { path: 'search', component: SearchComponent },
+      { path: 'detail/:id', component: DetailComponent },
     ])
   ],
   entryComponents: [
   ],
   providers: [
+    MovieService
   ],
   bootstrap: [AppComponent]
 })
