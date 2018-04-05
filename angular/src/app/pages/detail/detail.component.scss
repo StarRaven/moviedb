@@ -30,6 +30,7 @@
   width: 300px;
   height: 450px;
   cursor: pointer;
+  margin: auto;
 }
 
 .poster-img {
@@ -48,4 +49,38 @@
   width: 60px;
   height: 60px;
   margin-top: 16px;
+}
+
+.reccomendation-poster {
+  width: 100%;
+  cursor: pointer;
+}
+
+.people {
+  vertical-align:top;
+  width: 138px;
+  height: 280px;
+  padding: 0px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.people-poster {
+  height: 175px;
+  width: 138px;
+}
+
+.missing {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #DBDBDB;
+}
+
+.missing-icon {
+  width: 55px;
+  height: 55px;
+  margin: auto;
+  font-size:55px;
+  color: #B5B5B5;
 }

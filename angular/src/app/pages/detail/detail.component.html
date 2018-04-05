@@ -7,7 +7,7 @@
         <mat-card class="poster" fxFlex="none">
           <img class="poster-img" [src]="poster.thumb" (click)="open()" />
         </mat-card>
-        <div class="info-text" fxFlex="auto"> 
+        <div class="info-text" fxFlex="auto">
           <span>
             <h2 style="display:inline-block; margin:0">{{movieData.title}}</h2>
             <span class="release-date">({{movieData.release_date}})</span>
@@ -32,14 +32,75 @@
   <div fxLayout="row">
     <div fxFlex="25"></div>
     <div fxFlex="50">
-
-      <h3>Recommendations</h3>
+      <div style="width:100%">
+        <h3>Cast</h3>
+        <mat-card class="people" *ngFor="let c1 of cast">
+          <div class="people-poster">
+            <div *ngIf="c1.profile_path">
+              <img style="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c1.profile_path" />
+            </div>
+            <div *ngIf="!c1.profile_path" class="missing">
+              <mat-icon class="missing-icon">person</mat-icon>
+            </div>
+          </div>
+          <div style="padding:10px; font-size:14px; height: 85px">
+            <a style="font-weight:bold; display: block;">{{c1.name}}</a>
+            <a>{{c1.character}}</a>
+          </div>
+        </mat-card>
+      </div>
+      <br />
       <hr />
-      <div >
-        <div style="width:33%; display:inline-block;">12</div>
-        <div style="width:33%; display:inline-block;">12</div>
-        <div style="width:33%; display:inline-block;">12</div>
-        <div style="width:33%; display:inline-block;">12</div>
+      <div style="width:100%">
+        <h3>Crew</h3>
+        <mat-card class="people" *ngFor="let c2 of crew">
+            <div class="people-poster">
+              <div *ngIf="c2.profile_path">
+                <img style="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c2.profile_path" />
+              </div>
+              <div *ngIf="!c2.profile_path" class="missing">
+                <mat-icon class="missing-icon">person</mat-icon>
+              </div>
+            </div>
+            <div style="padding:10px; font-size:14px; height: 85px">
+              <a style="font-weight:bold; display: block;">{{c2.name}}</a>
+              <a>{{c2.job}}</a>
+            </div>
+          </mat-card>
+      </div>
+      <br />
+      <hr />
+      <div style="width:100%">
+        <h3>Recommendations</h3>
+      </div>
+      <div style="width:60%; display: inline-block;">
+        <mat-card>
+          <div echarts style="height:540px" [options]="recommendationChartOption" (chartInit)="onRecommendationChartInit($event)" (chartClick)="onRecommendationChartEvent($event, 'chartClick')"
+            class=""></div>
+        </mat-card>
+      </div>
+      <div style="width:35%; float:right">
+        <mat-card *ngIf="selectRecommendation" style="height:540px">
+          <img class="reccomendation-poster" (click)="router.navigate(['/detail', selectRecommendation.detail.id]);" [src]="'https://image.tmdb.org/t/p/w342/' + selectRecommendation.detail.poster_path"
+          />
+          <div style="width:100%">
+            <div style="width:70%; display:inline-block; height:70px">
+              <h4>
+                {{selectRecommendation.detail.title}}
+              </h4>
+            </div>
+            <div style="display: inline-flex;float:right; height:70px">
+              <span style="margin:auto">
+                {{selectRecommendation.detail.vote_average}}
+                <mat-icon>star_rate</mat-icon>
+              </span>
+            </div>
+          </div>
+          <button mat-raised-button color="primary" (click)="getRecommendations(selectRecommendation.id, selectRecommendation.detail.id)">Explore</button>
+        </mat-card>
+        <mat-card *ngIf="!selectRecommendation">
+          Please select a node in the left
+        </mat-card>
       </div>
     </div>
     <div fxFlex="25"></div>
