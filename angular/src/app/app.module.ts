@@ -39,6 +39,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { DetailComponent } from './pages/detail/detail.component';
 
 import { MovieService } from './services/movie.service';
+import { FooterComponent } from './pages/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MovieService } from './services/movie.service';
     IndexComponent,
     SearchComponent,
     DetailComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
