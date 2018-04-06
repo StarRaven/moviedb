@@ -25,7 +25,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 import { TopmenuComponent } from './pages/topmenu/topmenu.component';
 
@@ -40,6 +39,9 @@ import { DetailComponent } from './pages/detail/detail.component';
 
 import { MovieService } from './services/movie.service';
 import { FooterComponent } from './pages/footer/footer.component';
+import { SearchboxComponent } from './pages/searchbox/searchbox.component';
+
+import { NgxTypeaheadModule } from 'ngx-typeahead';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { FooterComponent } from './pages/footer/footer.component';
     SearchComponent,
     DetailComponent,
     FooterComponent,
+    SearchboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,8 +81,7 @@ import { FooterComponent } from './pages/footer/footer.component';
     FlexLayoutModule,
 
     LightboxModule,
-
-    NgSelectModule,
+    NgxTypeaheadModule,
     NgxEchartsModule,
 
     RouterModule.forRoot([

@@ -1,0 +1,48 @@
+<div fxLayout="row">
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <!--
+    <input class="search-input" type="text" ngxTypeahead [value]="query" [taList]="staticList" (taSelected)="handleStaticResultSelected($event)"
+      (keyup)="search()">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    
+  -->
+    <mat-form-field class="search-input">
+
+      <button mat-button matPrefix mat-icon-button (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <input matInput type="text" placeholder="Type to search" ngxTypeahead [value]="query" [taItemTpl]="itemTpl" [taList]="staticList"
+        (taSelected)="handleStaticResultSelected($event)" (keyup)="search()" />
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <ng-template #itemTpl let-result>
+        <div class="list-item">
+          <div class="item">
+            {{ result.result }}
+          </div>
+        </div>
+      </ng-template>
+    </mat-form-field>
+  </div>
+  <div fxFlex="25" style="display:flex">
+    <button mat-button mat-icon-button (click)="more=!more" style="margin:auto 0">
+      <mat-icon>reorder</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div fxLayout="row">
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <div *ngIf="more" style="margin-bottom:14px">
+        <mat-checkbox class="advanced" [(ngModel)]="title" color="primary">Title</mat-checkbox>
+        <mat-checkbox class="advanced" [(ngModel)]="overview" color="primary">Overview</mat-checkbox>
+    </div>
+  </div>
+  <div fxFlex="25">
+  </div>
+</div>

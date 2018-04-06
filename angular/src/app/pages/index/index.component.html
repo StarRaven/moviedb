@@ -12,8 +12,6 @@
 
 <body>
   <app-topmenu></app-topmenu>
-  <ng-select [items]="movies" [typeahead]="searchTerm" [(ngModel)]="selectedMovie">
-  </ng-select>
 
   <div echarts [options]="chartOption" (chartClick)="onChartEvent($event, 'chartClick')" class="demo-chart"></div>
 </body>
