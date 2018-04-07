@@ -15,7 +15,7 @@
         <mat-icon>search</mat-icon>
       </button>
       <input matInput type="text" placeholder="Type to search" ngxTypeahead [(ngModel)]="query" [taItemTpl]="itemTpl" [taList]="staticList"
-        (taSelected)="handleResultSelected($event)" (keyup)="search()" />
+        (taSelected)="handleResultSelected($event)" (keyup)="search()" (keyup.enter)="keyEnter()"/>
       <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
         <mat-icon>close</mat-icon>
       </button>

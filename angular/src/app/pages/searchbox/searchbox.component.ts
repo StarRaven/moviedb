@@ -99,4 +99,50 @@ export class SearchboxComponent implements OnInit {
       // The 3rd callback handles the "complete" event.
       () => console.log("observable complete"));
   }
+
+  keyEnter() {
+    console.log(11);
+    this.staticList = [];
+    let searchQuery = '{\"query\":{\"query_string\":{\"query\":\"*';
+    console.log(this.query);
+    let searchTermStr = this.query.replace(' ', '* AND *');
+    console.log(searchTermStr);
+    searchQuery += searchTermStr;
+    searchQuery += '*\",\"fields\":[';
+    if (this.title) {
+      searchQuery += '\"title\",';
+    }
+    if (this.genres) {
+      searchQuery += '\"genres.name\",';
+    }
+    if (this.overview) {
+      searchQuery += '\"overview\",';
+    }
+    if (this.company) {
+      searchQuery += '\"production_companies.name\",';
+    }
+    if (this.country) {
+      searchQuery += '\"production_countries.name\",';
+    }
+    if (searchQuery.charAt(searchQuery.length - 1) === ',') {
+      searchQuery = searchQuery.substring(0, searchQuery.length - 1);
+    }
+    searchQuery += '],\"use_dis_max\":true}}}';
+    this.ms.search(searchQuery).subscribe(
+      (jsonData) => {
+        let jsonDataBody = jsonData.json();
+        // console.log(jsonData);
+        // console.log(jsonDataBody);
+        this.staticList = jsonDataBody.hits.hits;
+        this.global.all = jsonDataBody.hits.total;
+        this.global.query = searchQuery;
+        this.gotoResult();
+        // console.log(this.staticList);
+      },
+      // The 2nd callback handles errors.
+      (err) => console.error(err),
+      // The 3rd callback handles the "complete" event.
+      () => console.log("observable complete"));
+  }
 }
+
