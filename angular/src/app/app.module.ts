@@ -38,6 +38,9 @@ import { SearchComponent } from './pages/search/search.component';
 import { DetailComponent } from './pages/detail/detail.component';
 
 import { MovieService } from './services/movie.service';
+import { GlobalService } from './services/global.service';
+import { GraphService } from './services/graph.service';
+
 import { FooterComponent } from './pages/footer/footer.component';
 import { SearchboxComponent } from './pages/searchbox/searchbox.component';
 
@@ -87,14 +90,16 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
     RouterModule.forRoot([
       { path: '', redirectTo: '/index', pathMatch: 'full' },
       { path: 'index', component: IndexComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'search/:refresh', component: SearchComponent },
       { path: 'detail/:id', component: DetailComponent },
     ])
   ],
   entryComponents: [
   ],
   providers: [
-    MovieService
+    MovieService,
+    GlobalService,
+    GraphService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
+import { GlobalService } from '../../services/global.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Lightbox } from 'angular2-lightbox';
@@ -18,7 +19,7 @@ export class DetailComponent implements OnInit {
   private _albums: Array<any> = [];
   chartOption: any;
 
-  nowCatid: number;
+  nowCatid: number = 0;
   recommendations: Array<any> = [];
   recommendationChartInstance: any;
   recommendationChartOption: any;
@@ -30,6 +31,7 @@ export class DetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private ms: MovieService,
+    private global: GlobalService,
     private _lightbox: Lightbox,
     private router: Router
   ) { }
@@ -50,8 +52,9 @@ export class DetailComponent implements OnInit {
             id: this.recommendationChartData.length,
             name: r.title,
             category: this.nowCatid,
-            symbolSize: 13,
-            detail: r
+            symbolSize: 17,
+            detail: r,
+            draggable: true
           });
           console.log(chartid, this.recommendationChartData.length - 1);
           this.recommendationChartEdges.push({
@@ -80,7 +83,6 @@ export class DetailComponent implements OnInit {
 
   initRecommendationChart() {
     this.selectRecommendation = null;
-    this.nowCatid = 0;
     this.recommendationChartCategories = [];
     for (var i = 0; i < 9; i++) {
       this.recommendationChartCategories.push({
@@ -91,10 +93,10 @@ export class DetailComponent implements OnInit {
       fixed: true,
       x: 200,
       y: 270,
-      symbolSize: 15,
+      symbolSize: 20,
       id: '0',
       name: this.movieData.title,
-      category: this.nowCatid,
+      category: '0',
       detail: this.movieData
     }];
 
@@ -111,7 +113,7 @@ export class DetailComponent implements OnInit {
           // initLayout: 'circular'
           // gravity: 0
           repulsion: 100,
-          edgeLength: 10
+          edgeLength: 80
         },
         label: {
           normal: {
@@ -128,7 +130,35 @@ export class DetailComponent implements OnInit {
       (jsonData) => {
         let jsonDataBody = jsonData.json();
         this.cast = jsonDataBody.cast;
+        this.cast = this.cast.slice(0, Math.min(12, this.cast.length));
         this.crew = jsonDataBody.crew;
+        this.crew = this.crew.slice(0, Math.min(12, this.crew.length));
+      },
+      // The 2nd callback handles errors.
+      (err) => console.error(err),
+      // The 3rd callback handles the "complete" event.
+      () => console.log("observable complete"));
+  }
+
+  searchGenre(genre: string) {
+    // console.log(genre);
+    let searchQuery = '{\"query\":{\"query_string\":{\"query\":\"*';
+    searchQuery += genre.toLowerCase();
+    searchQuery += '*\",\"fields\":[\"genres.name\"],\"use_dis_max\":true}}}';
+    console.log(searchQuery);
+    this.ms.search(searchQuery).subscribe(
+      (jsonData) => {
+        let jsonDataBody = jsonData.json();
+         console.log(jsonData);
+         console.log(jsonDataBody);
+        let result = jsonDataBody.hits.hits;
+        console.log(result);
+        
+        if (result) {
+          this.global.result = result;
+          this.global.all = jsonDataBody.hits.total;
+          this.router.navigate(['/search', Math.random()]);
+        }
       },
       // The 2nd callback handles errors.
       (err) => console.error(err),
@@ -164,7 +194,7 @@ export class DetailComponent implements OnInit {
         (err) => console.error(err),
         // The 3rd callback handles the "complete" event.
         () => console.log("observable complete"));
-      
+
     });
 
     getMovie.subscribe(movie => {

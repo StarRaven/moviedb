@@ -1,19 +1,85 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="spm-id" content="a21e4">
-  <meta name="description" content="">
-  <meta name="keyword" content="">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="renderer" content="webkit">
-</head>
-
-<body>
-  <app-topmenu></app-topmenu>
-
-  <div echarts [options]="chartOption" (chartClick)="onChartEvent($event, 'chartClick')" class="demo-chart"></div>
-</body>
-
-</html>
+<app-topmenu></app-topmenu>
+<app-searchbox></app-searchbox>
+<div fxLayout="row">
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <h3>Now Playing & In Theatres: </h3>
+    <div style="width:100%">
+      <div style="width:50%; float:left">
+        <div style="width:100%; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[0].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[0].id])">
+          <span class="nowPlaying-title">{{nowPlaying[0].title}}</span>
+        </div>
+        <div style="width:50%; float:left; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[1].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[1].id])">
+          <span class="nowPlaying-title">{{nowPlaying[1].title}}</span>
+        </div>
+        <div style="width:50%; float:right; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[2].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[2].id])">
+          <span class="nowPlaying-title">{{nowPlaying[2].title}}</span>
+        </div>
+      </div>
+      <div style="width:50%; float:right">
+        <div style="width:50%; float:left; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[3].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[3].id])">
+          <span class="nowPlaying-title">{{nowPlaying[3].title}}</span>
+        </div>
+        <div style="width:50%; float:right; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[4].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[4].id])">
+          <span class="nowPlaying-title">{{nowPlaying[4].title}}</span>
+        </div>
+        <div style="width:100%; line-height: 0; position:relative">
+          <img style="width:100%; cursor: pointer;" [src]="'https://image.tmdb.org/t/p/w780/' + nowPlaying[5].backdrop_path" (click)="router.navigate(['/detail', nowPlaying[5].id])">
+          <span class="nowPlaying-title">{{nowPlaying[5].title}}</span>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <hr />
+    <h3>Most Popular: </h3>
+    <div *ngFor="let p of mostPopular" style="width:20%; padding: 0 20px 40px 20px; display: inline-block; vertical-align: top;">
+      <mat-card class="popular-card" (click)="router.navigate(['/detail', p.id])">
+        <img class="popular-poster" [src]="'https://image.tmdb.org/t/p/w780/'+p.poster_path" />
+        <div style="padding:10px; font-size:14px; height: 55px;">
+          <a style="font-weight:bold; display: block;">{{p.title}}</a>
+          <span style="display:flex; float:right">
+            <mat-icon style="margin:auto 0; color:#E4BB24">star</mat-icon>&nbsp;
+            <a style="font-weight:bold; display: block;">{{p.vote_average.toFixed(1)}} / 10 </a>
+          </span>
+        </div>
+      </mat-card>
+    </div>
+    <hr />
+    <h3>Explore: </h3>
+    <div class="box">
+      <mat-card class="left">
+        <div echarts [options]="genresChartOption" (chartInit)="onGenresChartInit($event)" (chartClick)="onGenresChartEvent($event, 'chartClick')"></div>
+      </mat-card>
+      <mat-card class="right">
+        <div *ngIf="genresSelectCat">
+          <div style="height:210px; display:flex">
+            <img style="width:140px; margin:auto" src="/assets/images/one.png" />
+          </div>
+          <hr />
+          <h4 style="margin-bottom: 8px;">Category:</h4>
+          <button style="text-align: left;" mat-button (click)="singleGenre(cat1)">{{cat1}}</button>
+        </div>
+        <div *ngIf="genresSelectLink">
+          <div style="height:210px; display:flex">
+            <img style="width:100%; margin:auto" src="/assets/images/two.png" />
+          </div>
+          <hr />
+          <h4 style="margin-bottom: 8px;">Category:</h4>
+          <button style="text-align: left;" mat-button (click)="singleGenre(cat1)">{{cat1}}</button>
+          <br />
+          <button style="text-align: left;" mat-button (click)="singleGenre(cat2)">{{cat2}}</button>
+          <br />
+          <button style="text-align: left;" mat-button (click)="doubleGenre(cat1,cat2)">{{cat1}} & {{cat2}}</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div fxFlex="25"></div>
+</div>
+<app-footer></app-footer>

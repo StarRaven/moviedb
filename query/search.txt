@@ -1,3 +1,1 @@
-{
-    "query": { "wildcard": { "overview":"*is*" } }
-}
+{"query":{"query_string":{"query":"*drama*","fields":["genres"],"use_dis_max":true}}}

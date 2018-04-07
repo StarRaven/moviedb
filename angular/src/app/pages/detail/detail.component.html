@@ -15,13 +15,13 @@
           </span>
           <div echarts [options]="chartOption" class="rate"></div>
           <h3 style="margin-bottom: 0">Overview</h3>
-          <div>
+          <div style="height: 200px; overflow:auto">
             <p>{{movieData.overview}}</p>
           </div>
           <h3 style="margin-bottom: 0">Genres</h3>
           <div fxLayout="row">
             <div fxFlex="33" *ngFor="let genre of movieData.genres">
-              <p>{{genre.name}}</p>
+              <p style="cursor: pointer;" (click)="searchGenre(genre.name)">{{genre.name}}</p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
         <mat-card class="people" *ngFor="let c1 of cast">
           <div class="people-poster">
             <div *ngIf="c1.profile_path">
-              <img style="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c1.profile_path" />
+              <img class="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c1.profile_path" />
             </div>
             <div *ngIf="!c1.profile_path" class="missing">
               <mat-icon class="missing-icon">person</mat-icon>
@@ -55,19 +55,19 @@
       <div style="width:100%">
         <h3>Crew</h3>
         <mat-card class="people" *ngFor="let c2 of crew">
-            <div class="people-poster">
-              <div *ngIf="c2.profile_path">
-                <img style="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c2.profile_path" />
-              </div>
-              <div *ngIf="!c2.profile_path" class="missing">
-                <mat-icon class="missing-icon">person</mat-icon>
-              </div>
+          <div class="people-poster">
+            <div *ngIf="c2.profile_path">
+              <img class="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c2.profile_path" />
             </div>
-            <div style="padding:10px; font-size:14px; height: 85px">
-              <a style="font-weight:bold; display: block;">{{c2.name}}</a>
-              <a>{{c2.job}}</a>
+            <div *ngIf="!c2.profile_path" class="missing">
+              <mat-icon class="missing-icon">person</mat-icon>
             </div>
-          </mat-card>
+          </div>
+          <div style="padding:10px; font-size:14px; height: 85px">
+            <a style="font-weight:bold; display: block;">{{c2.name}}</a>
+            <a>{{c2.job}}</a>
+          </div>
+        </mat-card>
       </div>
       <br />
       <hr />
@@ -91,9 +91,9 @@
               </h4>
             </div>
             <div style="display: inline-flex;float:right; height:70px">
-              <span style="margin:auto">
-                {{selectRecommendation.detail.vote_average}}
-                <mat-icon>star_rate</mat-icon>
+              <span style="margin:auto; display:flex">
+                {{selectRecommendation.detail.vote_average.toFixed(1)}}
+                <mat-icon style="margin:auto">star_rate</mat-icon>
               </span>
             </div>
           </div>

@@ -1,3 +1,36 @@
-<p>
-  search works!
-</p>
+<app-topmenu></app-topmenu>
+<app-searchbox></app-searchbox>
+<div fxLayout="row">
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <h3>&nbsp;SEARCH RESULT: </h3>
+    <mat-card *ngFor="let movie of result" style="padding: 0px; margin: 10px;">
+      <div style="width:185px; height:278px; float:left">
+        <img *ngIf="movie._source.poster_path" style="width:185px; height:278px" [src]="'https://image.tmdb.org/t/p/w342/' + movie._source.poster_path"
+        />
+        <div *ngIf="!movie._source.poster_path" style="background:#DBDBDB; width:185px; height:278px; display:flex">
+          <mat-icon style="margin:auto; color:#B5B5B5; font-size:92px; height:92px; width:92px;">image</mat-icon>
+        </div>
+      </div>
+      <div style="height:238px; margin-left: 200px; padding:20px">
+        <h3 style="margin-top:0; margin-bottom:6px;">{{movie._source.title}}</h3>
+        <span style="color: rgba(0,0,0,0.6);">{{movie._source.release_date}}</span>
+        <div style="float:right; display:flex; margin-right: 8px;">
+          <mat-icon style="margin:auto; color:#E4BB24">star</mat-icon>
+          {{movie._source.vote_average.toFixed(1)}} / 10
+        </div>
+        <div>
+          <p style="font-size:1.0em; height: 100px; overflow:auto">{{movie._source.overview}}</p>
+        </div>
+        <div style="position: absolute; bottom:14px; width: 676px">
+          <button mat-raised-button color="primary" (click)="router.navigate(['/detail', movie._source.id]);">More Detail ...</button>
+        </div>
+      </div>
+    </mat-card>
+    <mat-paginator style="background:transparent" [length]="global.all" [pageSize]="10" (page)="pageTurn($event)">
+    </mat-paginator>
+    <br />
+  </div>
+  <div fxFlex="25"></div>
+</div>
+<app-footer></app-footer>
