@@ -13,6 +13,8 @@ import { Lightbox } from 'angular2-lightbox';
 export class DetailComponent implements OnInit {
   id: number;
   movieData: any;
+  keywords: Array<any> = [];
+  reviews: Array<any> = [];
   poster: any;
   cast: any;
   crew: any;
@@ -45,7 +47,7 @@ export class DetailComponent implements OnInit {
         for (let entry of jsonDataBody['results']) {
           this.recommendations.push(entry);
         };
-        console.log(this.recommendations);
+        // console.log(this.recommendations);
         for (let i = 0; i < 5; i++) {
           let r = this.recommendations[i];
           this.recommendationChartData.push({
@@ -56,7 +58,7 @@ export class DetailComponent implements OnInit {
             detail: r,
             draggable: true
           });
-          console.log(chartid, this.recommendationChartData.length - 1);
+          // console.log(chartid, this.recommendationChartData.length - 1);
           this.recommendationChartEdges.push({
             source: chartid,
             target: this.recommendationChartData.length - 1
@@ -145,15 +147,15 @@ export class DetailComponent implements OnInit {
     let searchQuery = '{\"query\":{\"query_string\":{\"query\":\"*';
     searchQuery += genre.toLowerCase();
     searchQuery += '*\",\"fields\":[\"genres.name\"],\"use_dis_max\":true}}}';
-    console.log(searchQuery);
+    // console.log(searchQuery);
     this.ms.search(searchQuery).subscribe(
       (jsonData) => {
         let jsonDataBody = jsonData.json();
-         console.log(jsonData);
-         console.log(jsonDataBody);
+        // console.log(jsonData);
+        // console.log(jsonDataBody);
         let result = jsonDataBody.hits.hits;
-        console.log(result);
-        
+        // console.log(result);
+
         if (result) {
           this.global.result = result;
           this.global.all = jsonDataBody.hits.total;
@@ -164,6 +166,73 @@ export class DetailComponent implements OnInit {
       (err) => console.error(err),
       // The 3rd callback handles the "complete" event.
       () => console.log("observable complete"));
+  }
+
+  regix(s) {
+    var num = parseInt(s);
+    let prefix: string = "";
+    if (num < 0) {
+      num *= -1;
+      prefix = "-";
+    }
+    let DIGIT_PATTERN = /(^|\s)\d+(?=\.?\d*($|\s))/g;
+    let MILI_PATTERN = /(?=(?!\b)(\d{3})+\.?\b)/g;
+    let str: string = num.toString().replace(DIGIT_PATTERN, (m) => m.replace(MILI_PATTERN, ','));
+    return prefix + str;
+  }
+
+  searchKeyword(id: number) {
+    this.ms.getKeywordMovies(id).subscribe(
+      (jsonData) => {
+        let result = jsonData.json().results;
+        if (result) {
+          // console.log(result);
+          this.global.result = [];
+          for (let r of result) {
+            this.global.result.push({
+              _source: r
+            });
+          }
+          this.global.result = this.global.result.slice(0, 10);
+          // console.log(this.global.result);
+          this.global.all = 10;
+          this.router.navigate(['/search', Math.random()]);
+        }
+      },
+      // The 2nd callback handles errors.
+      (err) => console.error(err),
+      // The 3rd callback handles the "complete" event.
+      () => console.log("observable complete"));
+  }
+
+  getReviews() {
+    this.ms.getReviews(this.id).subscribe(
+      (jsonData) => {
+        let jsonDataBody = jsonData.json();
+        this.reviews = jsonDataBody.results.slice(0, 3);
+        console.log(this.reviews);
+      },
+      // The 2nd callback handles errors.
+      (err) => console.error(err),
+      // The 3rd callback handles the "complete" event.
+      () => console.log("observable complete"));
+  }
+
+  getKeywords() {
+    this.ms.getKeywords(this.id).subscribe(
+      (jsonData) => {
+        let jsonDataBody = jsonData.json();
+        this.keywords = jsonDataBody.keywords;
+        // console.log(this.keywords);
+      },
+      // The 2nd callback handles errors.
+      (err) => console.error(err),
+      // The 3rd callback handles the "complete" event.
+      () => console.log("observable complete"));
+  }
+
+  isEmpty(value) {
+    return (Array.isArray(value) && value.length === 0) || (Object.prototype.isPrototypeOf(value) && Object.keys(value).length === 0);
   }
 
   ngOnInit() {
@@ -187,14 +256,17 @@ export class DetailComponent implements OnInit {
         (jsonData) => {
           let jsonDataBody = jsonData.json();
           this.movieData = jsonDataBody;
-          console.log(jsonDataBody);
+          // console.log(console.log(jsonDataBody);
           observer.next(this.movieData);
         },
         // The 2nd callback handles errors.
         (err) => console.error(err),
         // The 3rd callback handles the "complete" event.
-        () => console.log("observable complete"));
-
+        () => {
+          this.getKeywords();
+          this.getReviews();
+        }
+      );
     });
 
     getMovie.subscribe(movie => {

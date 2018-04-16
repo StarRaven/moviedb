@@ -27,13 +27,9 @@ export class SearchComponent implements OnInit {
     this.ms.pageTurn(this.query,event.pageIndex).subscribe(
       (jsonData) => {
         let jsonDataBody = jsonData.json();
-        // console.log(jsonData);
-        // console.log(jsonDataBody);
         this.result = jsonDataBody.hits.hits;
       },
-      // The 2nd callback handles errors.
       (err) => console.error(err),
-      // The 3rd callback handles the "complete" event.
       () => console.log("observable complete"));
   }
 

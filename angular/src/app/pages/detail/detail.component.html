@@ -15,7 +15,7 @@
           </span>
           <div echarts [options]="chartOption" class="rate"></div>
           <h3 style="margin-bottom: 0">Overview</h3>
-          <div style="height: 200px; overflow:auto">
+          <div style="max-height: 200px; overflow:auto">
             <p>{{movieData.overview}}</p>
           </div>
           <h3 style="margin-bottom: 0">Genres</h3>
@@ -34,8 +34,50 @@
     <div fxFlex="25"></div>
     <div fxFlex="50">
       <div style="width:100%">
+        <h3>Detail</h3>
+        <div class="detail-box">
+          <a class="detail-box-title">Original Title</a>
+          <a class="detail-box-content">{{movieData.original_title}}</a>
+        </div>
+        <div class="detail-box">
+          <a class="detail-box-title">Status</a>
+          <a class="detail-box-content">{{movieData.status}}</a>
+        </div>
+        <div class="detail-box">
+          <a class="detail-box-title">Original Language</a>
+          <a class="detail-box-content">{{movieData.original_language}}</a>
+        </div>
+        <div class="detail-box">
+          <a class="detail-box-title">Budget</a>
+          <a *ngIf="movieData.budget" class="detail-box-content">${{regix(movieData.budget)}}</a>
+          <a *ngIf="!movieData.budget" class="detail-box-content">-</a>
+        </div>
+        <div class="detail-box">
+          <a class="detail-box-title">Revenue</a>
+          <a *ngIf="movieData.revenue" class="detail-box-content">${{regix(movieData.revenue)}}</a>
+          <a *ngIf="!movieData.revenue" class="detail-box-content">-</a>
+        </div>
+        <div class="detail-box">
+          <a class="detail-box-title">Runtime</a>
+          <a class="detail-box-content">{{movieData.runtime}} min</a>
+        </div>
+        <div style="margin: 6px 10px;">
+          <a class="detail-box-title" style="margin-bottom: 5px">Keywords</a>
+          <a *ngFor="let keyword of keywords" (click)="searchKeyword(keyword.id)" class="keyword">{{keyword.name}}</a>
+        </div>
+        <br />
+        <hr />
+        <div *ngIf="reviews.length !== 0">
+          <h3>Reviews</h3>
+          <mat-card class="review-card" *ngFor="let r of reviews">
+            <a class="review-title">A review by {{r.author}}</a>
+            <p class="review-content">{{r.content}}</p>
+          </mat-card>
+          <br />
+          <hr />
+        </div>
         <h3>Cast</h3>
-        <mat-card class="people" *ngFor="let c1 of cast">
+        <mat-card class="people" *ngFor="let c1 of cast" (click)="router.navigate(['/people', c1.id]);">
           <div class="people-poster">
             <div *ngIf="c1.profile_path">
               <img class="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c1.profile_path" />
@@ -54,7 +96,7 @@
       <hr />
       <div style="width:100%">
         <h3>Crew</h3>
-        <mat-card class="people" *ngFor="let c2 of crew">
+        <mat-card class="people" *ngFor="let c2 of crew" (click)="router.navigate(['/people', c2.id]);">
           <div class="people-poster">
             <div *ngIf="c2.profile_path">
               <img class="people-poster" [src]="'https://image.tmdb.org/t/p/w138_and_h175_face/'+c2.profile_path" />

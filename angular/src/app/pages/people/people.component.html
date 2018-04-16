@@ -1,0 +1,57 @@
+<app-topmenu></app-topmenu>
+<app-searchbox></app-searchbox>
+<div fxLayout="row" style="margin-top: 20px;">
+  <div fxFlex="25"></div>
+  <div fxFlex="50" class="bg-filter">
+    <img class="person-poster" [src]="poster.thumb" (click)="open()" />
+    <div class="bio-wrapper">
+      <div class="bio">
+        <a class="bio-title">{{person.name}}</a>
+        <h3>Biography</h3>
+        <p class="bio-content">{{person.biography}}</p>
+      </div>
+    </div>
+    <br />
+  </div>
+  <div fxFlex="25"></div>
+</div>
+<div fxLayout="row">
+  <div fxFlex="25"></div>
+  <div fxFlex="50">
+    <div class="info-wrapper">
+      <h3>Personal Info</h3>
+      <div class="info-box">
+        <a class="info-title">Gender</a>
+        <a *ngIf="person.gender===1" class="info-content">Female</a>
+        <a *ngIf="person.gender!==1" class="info-content">Male</a>
+      </div>
+      <div class="info-box">
+        <a class="info-title">Known Credits</a>
+        <a class="info-content">{{creditsNumber}}</a>
+      </div>
+      <div class="info-box">
+        <a class="info-title">Birthday</a>
+        <a class="info-content">{{person.birthday}}</a>
+      </div>
+      <div class="info-box">
+        <a class="info-title">Place of Birth</a>
+        <a class="info-content">{{person.place_of_birth}}</a>
+      </div>
+      <div class="info-box">
+        <a class="info-title">Official Site</a>
+        <a *ngIf="person.homepage" class="info-content">{{person.homepage}}</a>
+        <a *ngIf="!person.homepage" class="info-content">-</a>
+      </div>
+    </div>
+    <mat-card class="detail-card">
+      <h3>Known For</h3>
+      <div *ngFor="let movie of movies" class="cast-movie-card" (click)="router.navigate(['/detail', movie.id]);">
+        <img class="cast-movie-poster" [src]="'https://image.tmdb.org/t/p/w342/'+movie.poster_path" />
+        <a class="cast-movie-title">{{movie.title}}</a>
+      </div>
+    </mat-card>
+    <br />
+  </div>
+  <div fxFlex="25"></div>
+</div>
+<app-footer></app-footer>

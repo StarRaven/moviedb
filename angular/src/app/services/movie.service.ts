@@ -43,6 +43,24 @@ export class MovieService {
       .map(response => response);
   }
 
+  getKeywords(id: number) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.get('https://api.themoviedb.org/3/movie/'+id+'/keywords?api_key=abc69f3218f083159cb0ebe413e122d2', { headers: headers })
+      .map(response => response);
+  }
+
+  getKeywordMovies(id: number) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.get('https://api.themoviedb.org/3/keyword/'+id+'/movies?api_key=abc69f3218f083159cb0ebe413e122d2&language=en-US&include_adult=false', { headers: headers })
+      .map(response => response);
+  }
+
+  getReviews(id: number) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.get('https://api.themoviedb.org/3/movie/'+id+'/reviews?api_key=abc69f3218f083159cb0ebe413e122d2&language=en-US&page=1', { headers: headers })
+      .map(response => response);
+  }
+
   getNowPlaying() {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     return this.http.get('https://api.themoviedb.org/3/movie/now_playing?api_key=abc69f3218f083159cb0ebe413e122d2&language=en-US&page=1', { headers: headers })

@@ -40,11 +40,13 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { MovieService } from './services/movie.service';
 import { GlobalService } from './services/global.service';
 import { GraphService } from './services/graph.service';
+import { PeopleService} from './services/people.service';
 
 import { FooterComponent } from './pages/footer/footer.component';
 import { SearchboxComponent } from './pages/searchbox/searchbox.component';
 
 import { NgxTypeaheadModule } from 'ngx-typeahead';
+import { PeopleComponent } from './pages/people/people.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
     DetailComponent,
     FooterComponent,
     SearchboxComponent,
+    PeopleComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,11 +95,13 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
       { path: 'index', component: IndexComponent },
       { path: 'search/:refresh', component: SearchComponent },
       { path: 'detail/:id', component: DetailComponent },
+      { path: 'people/:id', component: PeopleComponent },
     ])
   ],
   entryComponents: [
   ],
   providers: [
+    PeopleService,
     MovieService,
     GlobalService,
     GraphService
